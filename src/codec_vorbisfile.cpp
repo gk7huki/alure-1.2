@@ -47,6 +47,8 @@ MAKE_FUNC(ov_open_callbacks);
 MAKE_FUNC(ov_pcm_seek);
 MAKE_FUNC(ov_pcm_total);
 MAKE_FUNC(ov_read);
+MAKE_FUNC(ov_time_seek);
+MAKE_FUNC(ov_time_tell);
 #undef MAKE_FUNC
 
 #define ov_clear pov_clear
@@ -55,6 +57,8 @@ MAKE_FUNC(ov_read);
 #define ov_pcm_seek pov_pcm_seek
 #define ov_pcm_total pov_pcm_total
 #define ov_read pov_read
+#define ov_time_seek pov_time_seek
+#define ov_time_tell pov_time_tell
 #else
 #define vorbisfile_handle 1
 #endif
@@ -97,6 +101,8 @@ public:
         LOAD_FUNC(vorbisfile_handle, ov_pcm_seek);
         LOAD_FUNC(vorbisfile_handle, ov_pcm_total);
         LOAD_FUNC(vorbisfile_handle, ov_read);
+        LOAD_FUNC(vorbisfile_handle, ov_time_seek);
+        LOAD_FUNC(vorbisfile_handle, ov_time_tell);
     }
     static void Deinit()
     {
@@ -189,6 +195,23 @@ public:
 
         SetError("Seek failed");
         return false;
+    }
+
+    virtual bool SetOrder(ALuint order)
+    {
+        if (ov_time_seek(&oggFile, (double)order / 1000.0) == 0)
+            return true;
+
+        return false;
+    }
+
+    virtual ALuint GetOrder()
+    {
+        double time = ov_time_tell(&oggFile);
+        if (time == OV_EINVAL)
+            return 0;
+
+        return (ALuint)(time * 1000);
     }
 
     virtual alureInt64 GetLength()
