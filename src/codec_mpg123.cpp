@@ -111,8 +111,14 @@ public:
         mp123_handle = NULL;
     }
 #else
-    static void Init() { }
-    static void Deinit() { }
+    static void Init()
+    {
+        mpg123_init();
+    }
+    static void Deinit()
+    {
+        mpg123_exit();
+    }
 #endif
 
     virtual bool IsValid()
