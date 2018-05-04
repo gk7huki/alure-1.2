@@ -510,6 +510,29 @@ ALURE_API ALboolean ALURE_APIENTRY alureSetStreamOrder(alureStream *stream, ALui
     return stream->SetOrder(order);
 }
 
+/* Function: alureGetStreamOrder
+ *
+ * Query the current order of the module decoder.
+ *
+ * Returns:
+ * 0 on error.
+ *
+ * *Version Added*:
+ *
+ * See Also:
+ * <alureSetStreamOrder>
+ */
+ALURE_API ALuint ALURE_APIENTRY alureGetStreamOrder(alureStream *stream)
+{
+    if(!alureStream::Verify(stream))
+    {
+        SetError("Invalid stream pointer");
+        return 0;
+    }
+
+    return stream->GetOrder();
+}
+
 /* Function: alureSetStreamPatchset
  *
  * Specifies the patchset to use for MIDI streams. By default, the FluidSynth

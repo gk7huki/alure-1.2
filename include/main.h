@@ -122,6 +122,8 @@ struct alureStream {
         SetError("Invalid order for stream");
         return false;
     }
+    virtual ALuint GetOrder()
+    { return 0; }
     virtual bool SetPatchset(const char*)
     { return true; }
     virtual alureInt64 GetLength()
