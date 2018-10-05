@@ -25,6 +25,7 @@
 
 #include "main.h"
 
+#include <unistd.h>
 #include <string.h>
 #include <assert.h>
 #ifdef _WIN32
