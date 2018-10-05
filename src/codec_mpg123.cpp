@@ -79,7 +79,7 @@ public:
     static void Init()
     {
 #ifdef _WIN32
-#define MPG123_LIB "libmpg123.dll"
+#define MPG123_LIB "libmpg123-0.dll"
 #elif defined(__APPLE__)
 #define MPG123_LIB "libmpg123.0.dylib"
 #else

@@ -78,7 +78,7 @@ public:
     static void Init()
     {
 #ifdef _WIN32
-#define FLAC_LIB "libFLAC.dll"
+#define FLAC_LIB "libFLAC-8.dll"
 #elif defined(__APPLE__)
 #define FLAC_LIB "libFLAC.8.dylib"
 #else

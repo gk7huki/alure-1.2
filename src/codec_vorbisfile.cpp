@@ -77,7 +77,7 @@ public:
     {
 #ifdef HAS_VORBISIDEC
 #ifdef _WIN32
-#define VORBISFILE_LIB "vorbisidec.dll"
+#define VORBISFILE_LIB "libvorbisidec-1.dll"
 #elif defined(__APPLE__)
 #define VORBISFILE_LIB "libvorbisidec.1.dylib"
 #else
@@ -85,7 +85,7 @@ public:
 #endif
 #else
 #ifdef _WIN32
-#define VORBISFILE_LIB "vorbisfile.dll"
+#define VORBISFILE_LIB "libvorbisfile-3.dll"
 #elif defined(__APPLE__)
 #define VORBISFILE_LIB "libvorbisfile.3.dylib"
 #else

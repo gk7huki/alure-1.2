@@ -61,7 +61,7 @@ public:
     static void Init()
     {
 #ifdef _WIN32
-#define MODPLUG_LIB "libmodplug.dll"
+#define MODPLUG_LIB "libmodplug-1.dll"
 #elif defined(__APPLE__)
 #define MODPLUG_LIB "libmodplug.1.dylib"
 #else

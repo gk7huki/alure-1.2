@@ -172,7 +172,7 @@ public:
     static void Init()
     {
 #ifdef _WIN32
-#define FLUIDSYNTH_LIB "libfluidsynth.dll"
+#define FLUIDSYNTH_LIB "libfluidsynth-1.dll"
 #elif defined(__APPLE__)
 #define FLUIDSYNTH_LIB "libfluidsynth.1.dylib"
 #else
