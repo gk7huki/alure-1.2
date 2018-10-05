@@ -42,4 +42,5 @@ LIBALURE_1.1 {
 LIBALURE_1.2 {
   global:
     alureGetStreamLength;
+    alureGetStreamOrder;
 } LIBALURE_1.1;
