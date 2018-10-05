@@ -1,3 +1,4 @@
-build
+build*/
+external/
 *.kdev4
 docs/naturaldocs/Data
