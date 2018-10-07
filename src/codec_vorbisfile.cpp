@@ -199,7 +199,11 @@ public:
 
     virtual bool SetOrder(ALuint order)
     {
+#ifdef HAS_VORBISIDEC
+        if (ov_time_seek(&oggFile, (ogg_int64_t)order) == 0)
+#else
         if (ov_time_seek(&oggFile, (double)order / 1000.0) == 0)
+#endif
             return true;
 
         return false;
@@ -207,11 +211,19 @@ public:
 
     virtual ALuint GetOrder()
     {
+#ifdef HAS_VORBISIDEC
+        ogg_int64_t time = ov_time_tell(&oggFile);
+#else
         double time = ov_time_tell(&oggFile);
+#endif
         if (time == OV_EINVAL)
             return 0;
 
+#ifdef HAS_VORBISIDEC
+        return (ALuint)(time);
+#else
         return (ALuint)(time * 1000);
+#endif
     }
 
     virtual alureInt64 GetLength()
