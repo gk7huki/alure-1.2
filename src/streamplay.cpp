@@ -341,11 +341,7 @@ ALURE_API ALboolean ALURE_APIENTRY alurePlaySourceStream(ALuint source,
 	PROTECT_CONTEXT();
 	ALCcontext *current_ctx = alcGetCurrentContext();
 
-	if(alGetError() != AL_NO_ERROR)
-	{
-		SetError("Existing OpenAL error");
-		return AL_FALSE;
-	}
+	alGetError();
 
 	if(!alureStream::Verify(stream))
 	{
@@ -494,11 +490,7 @@ ALURE_API ALboolean ALURE_APIENTRY alurePlaySource(ALuint source,
 	PROTECT_CONTEXT();
 	ALCcontext *current_ctx = alcGetCurrentContext();
 
-	if(alGetError() != AL_NO_ERROR)
-	{
-		SetError("Existing OpenAL error");
-		return AL_FALSE;
-	}
+	alGetError();
 
 	EnterCriticalSection(&cs_StreamPlay);
 
@@ -558,11 +550,7 @@ ALURE_API ALboolean ALURE_APIENTRY alureStopSource(ALuint source, ALboolean run_
 	PROTECT_CONTEXT();
 	ALCcontext *current_ctx = alcGetCurrentContext();
 
-	if(alGetError() != AL_NO_ERROR)
-	{
-		SetError("Existing OpenAL error");
-		return AL_FALSE;
-	}
+	alGetError();
 
 	EnterCriticalSection(&cs_StreamPlay);
 
@@ -628,11 +616,7 @@ ALURE_API ALboolean ALURE_APIENTRY alurePauseSource(ALuint source)
 	PROTECT_CONTEXT();
 	ALCcontext *current_ctx = alcGetCurrentContext();
 
-	if(alGetError() != AL_NO_ERROR)
-	{
-		SetError("Existing OpenAL error");
-		return AL_FALSE;
-	}
+	alGetError();
 
 	EnterCriticalSection(&cs_StreamPlay);
 
@@ -677,11 +661,7 @@ ALURE_API ALboolean ALURE_APIENTRY alureResumeSource(ALuint source)
 	PROTECT_CONTEXT();
 	ALCcontext *current_ctx = alcGetCurrentContext();
 
-	if(alGetError() != AL_NO_ERROR)
-	{
-		SetError("Existing OpenAL error");
-		return AL_FALSE;
-	}
+	alGetError();
 
 	EnterCriticalSection(&cs_StreamPlay);
 

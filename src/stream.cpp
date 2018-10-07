@@ -174,11 +174,7 @@ ALURE_API ALboolean ALURE_APIENTRY alureStreamSizeIsMicroSec(ALboolean useUS)
  */
 ALURE_API alureStream* ALURE_APIENTRY alureCreateStreamFromFile(const ALchar *fname, ALsizei chunkLength, ALsizei numBufs, ALuint *bufs)
 {
-    if(alGetError() != AL_NO_ERROR)
-    {
-        SetError("Existing OpenAL error");
-        return NULL;
-    }
+    alGetError();
 
     if(chunkLength < 0)
     {
@@ -213,11 +209,7 @@ ALURE_API alureStream* ALURE_APIENTRY alureCreateStreamFromFile(const ALchar *fn
  */
 ALURE_API alureStream* ALURE_APIENTRY alureCreateStreamFromMemory(const ALubyte *fdata, ALuint length, ALsizei chunkLength, ALsizei numBufs, ALuint *bufs)
 {
-    if(alGetError() != AL_NO_ERROR)
-    {
-        SetError("Existing OpenAL error");
-        return NULL;
-    }
+    alGetError();
 
     if(chunkLength < 0)
     {
@@ -267,11 +259,7 @@ ALURE_API alureStream* ALURE_APIENTRY alureCreateStreamFromMemory(const ALubyte 
  */
 ALURE_API alureStream* ALURE_APIENTRY alureCreateStreamFromStaticMemory(const ALubyte *fdata, ALuint length, ALsizei chunkLength, ALsizei numBufs, ALuint *bufs)
 {
-    if(alGetError() != AL_NO_ERROR)
-    {
-        SetError("Existing OpenAL error");
-        return NULL;
-    }
+    alGetError();
 
     if(chunkLength < 0)
     {
@@ -331,11 +319,7 @@ ALURE_API alureStream* ALURE_APIENTRY alureCreateStreamFromCallback(
       void *userdata, ALenum format, ALuint samplerate,
       ALsizei chunkLength, ALsizei numBufs, ALuint *bufs)
 {
-    if(alGetError() != AL_NO_ERROR)
-    {
-        SetError("Existing OpenAL error");
-        return NULL;
-    }
+    alGetError();
 
     if(callback == NULL)
     {
@@ -409,11 +393,7 @@ ALURE_API ALsizei ALURE_APIENTRY alureGetStreamFrequency(alureStream *stream)
  */
 ALURE_API ALsizei ALURE_APIENTRY alureBufferDataFromStream(alureStream *stream, ALsizei numBufs, ALuint *bufs)
 {
-    if(alGetError() != AL_NO_ERROR)
-    {
-        SetError("Existing OpenAL error");
-        return -1;
-    }
+    alGetError();
 
     if(!alureStream::Verify(stream))
     {
@@ -589,11 +569,7 @@ ALURE_API alureInt64 ALURE_APIENTRY alureGetStreamLength(alureStream *stream)
  */
 ALURE_API ALboolean ALURE_APIENTRY alureDestroyStream(alureStream *stream, ALsizei numBufs, ALuint *bufs)
 {
-    if(alGetError() != AL_NO_ERROR)
-    {
-        SetError("Existing OpenAL error");
-        return AL_FALSE;
-    }
+    alGetError();
 
     if(numBufs < 0)
     {

@@ -593,11 +593,7 @@ ALURE_API ALboolean ALURE_APIENTRY alureShutdownDevice(void)
  */
 ALURE_API ALenum ALURE_APIENTRY alureGetSampleFormat(ALuint channels, ALuint bits, ALuint floatbits)
 {
-    if(alGetError() != AL_NO_ERROR)
-    {
-        SetError("Existing OpenAL error");
-        return AL_NONE;
-    }
+    alGetError();
 
     if(bits && floatbits)
     {
