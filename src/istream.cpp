@@ -145,7 +145,24 @@ static void *open_wrap(const char *filename, ALuint mode)
     if(mode != 0)
         return NULL;
 
+#ifdef HAVE_WINDOWS_H
+
+    size_t len = MultiByteToWideChar(CP_UTF8, 0, filename, -1, NULL, 0);
+    wchar_t *buf = new wchar_t[len+1];
+
+    if(len != 0)
+        MultiByteToWideChar(CP_UTF8, 0, filename, -1, buf, len);
+    buf[len] = L'\0';
+
+    FILE *f = _wfopen(buf, L"rb");
+    delete[] buf;
+    return f;
+
+#else
+
     return fopen(filename, "rb");
+
+#endif
 }
 
 static void close_wrap(void *user_data)
