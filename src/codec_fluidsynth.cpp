@@ -172,13 +172,19 @@ public:
     static void Init()
     {
 #ifdef _WIN32
-#define FLUIDSYNTH_LIB "libfluidsynth-1.dll"
+#define FLUIDSYNTH_LIB "libfluidsynth-%d.dll"
 #elif defined(__APPLE__)
-#define FLUIDSYNTH_LIB "libfluidsynth.1.dylib"
+#define FLUIDSYNTH_LIB "libfluidsynth.%d.dylib"
 #else
-#define FLUIDSYNTH_LIB "libfluidsynth.so.1"
+#define FLUIDSYNTH_LIB "libfluidsynth.so.%d"
 #endif
-        fsynth_handle = OpenLib(FLUIDSYNTH_LIB);
+        for (int i = 3; i > 0; i--)
+        {
+            char filename[32];
+            sprintf(filename, FLUIDSYNTH_LIB, i);
+            fsynth_handle = OpenLib(filename);
+            if (fsynth_handle) break;
+        }
         if(!fsynth_handle) return;
 
         LOAD_FUNC(fsynth_handle, fluid_settings_setstr);
@@ -666,8 +672,8 @@ private:
         if(fluidSettings)
         {
             fluid_settings_setnum(fluidSettings, "synth.gain", 0.5);
-            fluid_settings_setstr(fluidSettings, "synth.reverb.active", "yes");
-            fluid_settings_setstr(fluidSettings, "synth.chorus.active", "yes");
+            fluid_settings_setint(fluidSettings, "synth.reverb.active", 1);
+            fluid_settings_setint(fluidSettings, "synth.chorus.active", 1);
             fluid_settings_setint(fluidSettings, "synth.polyphony", 256);
             fluid_settings_setnum(fluidSettings, "synth.sample-rate", (double)sampleRate);
 
