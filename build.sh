@@ -1,6 +1,7 @@
 #!/bin/bash
 
 external="$(pwd)/external/win32"
+arch=${1#--}
 
 archs=(
   "linux32"
@@ -45,6 +46,9 @@ openaldir=(
 )
 
 for i in ${!archs[@]}; do
+  if [ ! -z ${arch} ] && [ ! ${archs[$i]} = ${arch} ]; then
+    continue
+  fi
   mkdir -p "build_${archs[$i]}"
   export OPENALDIR=${openaldir[$i]}
   prefix=`[ ! -z ${hosts[$i]} ] && echo ${hosts[$i]}-`

@@ -22,6 +22,7 @@ LDFLAGS_x86_64="-no-canonical-prefixes -Wl,--build-id -Wl,--no-undefined -Wl,-z,
 
 external="$(pwd)/external/android"
 toolchain_path="/opt/android-toolchains"
+arch=${1#--}
 
 toolchains=(
   "arm"
@@ -70,6 +71,9 @@ output="libalure-static.a"
 export OPENALDIR=$external
 
 for i in ${!archs[@]}; do
+  if [ ! -z ${arch} ] && [ ! ${archs[$i]} = ${arch} ]; then
+    continue
+  fi
   mkdir -p "build_${archs[$i]}"
   export NDK_TOOLCHAIN_PATH=$toolchain_path/${toolchains[$i]}
   (cd "build_${archs[$i]}" && cmake .. $flags -DHOST=${hosts[$i]} -DCPPFLAGS="${cppflags[$i]}" -DLDFLAGS="${ldflags[$i]}" $defines && make)
