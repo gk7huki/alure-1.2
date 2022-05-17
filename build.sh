@@ -6,6 +6,8 @@ arch=${1#--}
 archs=(
   "linux32"
   "linux64"
+  "linuxarmhf"
+  "linuxarm64"
   "win32"
   "win64"
 )
@@ -13,11 +15,15 @@ archs=(
 hosts=(
   ""
   ""
+  "arm-linux-gnueabihf"
+  "aarch64-linux-gnu"
   "i686-w64-mingw32"
   "x86_64-w64-mingw32"
 )
 
 defines=(
+  "-DBUILD_SHARED=OFF -DBUILD_EXAMPLES=OFF -DDUMB=OFF -DMODPLUG=OFF"
+  "-DBUILD_SHARED=OFF -DBUILD_EXAMPLES=OFF -DDUMB=OFF -DMODPLUG=OFF"
   "-DBUILD_SHARED=OFF -DBUILD_EXAMPLES=OFF -DDUMB=OFF -DMODPLUG=OFF"
   "-DBUILD_SHARED=OFF -DBUILD_EXAMPLES=OFF -DDUMB=OFF -DMODPLUG=OFF"
   "-DBUILD_SHARED=OFF -DBUILD_EXAMPLES=OFF -DDUMB=OFF -DMODPLUG=OFF -DHAS_SNDFILE=1 -DHAS_VORBISFILE=1 -DHAS_FLAC=1 -DHAS_MPG123=1 -DHAS_FLUIDSYNTH=1"
@@ -27,6 +33,8 @@ defines=(
 ccflags=(
   "-DCMAKE_CXX_FLAGS=-m32 -DCMAKE_C_FLAGS=-m32"
   "-DCMAKE_CXX_FLAGS=-m64 -DCMAKE_C_FLAGS=-m64"
+  "-DCMAKE_TOOLCHAIN_FILE=../XCompile-ARM.txt"
+  "-DCMAKE_TOOLCHAIN_FILE=../XCompile-ARM.txt"
   "-DCMAKE_CXX_FLAGS=\"-I$external/include\" -DCMAKE_TOOLCHAIN_FILE=../XCompile.txt"
   "-DCMAKE_CXX_FLAGS=\"-I$external/include\" -DCMAKE_TOOLCHAIN_FILE=../XCompile.txt"
 )
@@ -34,11 +42,15 @@ ccflags=(
 output=(
   "libalure-static.a"
   "libalure-static.a"
+  "libalure-static.a"
+  "libalure-static.a"
   "libALURE32-static.a"
   "libALURE32-static.a"
 )
 
 openaldir=(
+  ""
+  ""
   ""
   ""
   "$external"
