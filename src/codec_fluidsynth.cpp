@@ -33,6 +33,7 @@
 #endif
 
 #include <istream>
+#include <vector>
 
 #include <fluidsynth.h>
 
@@ -178,7 +179,8 @@ public:
 #else
 #define FLUIDSYNTH_LIB "libfluidsynth.so.%d"
 #endif
-        for (int i = 3; i > 0; i--)
+        std::vector<int> versions = {3, 2, 1};
+        for (auto i : versions)
         {
             char filename[32];
             sprintf(filename, FLUIDSYNTH_LIB, i);

@@ -29,6 +29,7 @@
 #include <assert.h>
 
 #include <istream>
+#include <vector>
 
 #include <FLAC/all.h>
 
@@ -78,14 +79,20 @@ public:
     static void Init()
     {
 #ifdef _WIN32
-#define FLAC_LIB "libFLAC-8.dll"
+#define FLAC_LIB "libFLAC-%d.dll"
 #elif defined(__APPLE__)
-#define FLAC_LIB "libFLAC.8.dylib"
+#define FLAC_LIB "libFLAC.%d.dylib"
 #else
-#define FLAC_LIB "libFLAC.so.8"
+#define FLAC_LIB "libFLAC.so.%d"
 #endif
-
-        flac_handle = OpenLib(FLAC_LIB);
+        std::vector<int> versions = {12, 8};
+        for (auto i : versions)
+        {
+            char filename[32];
+            sprintf(filename, FLAC_LIB, i);
+            flac_handle = OpenLib(filename);
+            if (flac_handle) break;
+        }
         if(!flac_handle) return;
 
         LOAD_FUNC(flac_handle, FLAC__stream_decoder_get_state);
